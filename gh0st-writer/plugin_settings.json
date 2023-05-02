@@ -1,0 +1,12 @@
+{
+    "tone": ["formal", "conversational", "humorous"],
+    "style": ["journalistic", "academic", "creative"],
+    "research": true,
+    "links": true,
+    "keyword_density": 2,
+    "plagiarism_checker": true,
+    "readability_score": true,
+    "grammar_checker": true,
+    "image_optimization": true,
+    "social_media_sharing": true
+}

@@ -1,0 +1,2 @@
+File Operation Logger write: C:\Users\john\Desktop\GPT\GIVEITATRY\home\autogpt\auto_gpt_workspace\main.php #1791668fe4da4bc371647720147767b4
+write: C:\Users\john\Desktop\GPT\GIVEITATRY\home\autogpt\auto_gpt_workspace\admin.php #342bd3f2f9ae272b843e882409152b0d

@@ -1,0 +1,132 @@
+# Prompt Workflow:
+The following 7 prompt templates are to be used in sequence when generating blog posts for the "gh0st-writer" WordPress Plugin.
+
+## ===START===
+
+===
+
+## 1. Identify Target Demographics and Pain Points Based on Industry, Topic, and Main Benefit: User selects the "Industry ($industry), Main Topic ($topic), and Main Benefit ($benefit)", then the user takes the input and uses it within the following prompt:
+```
+[ai_target-demographic-generator]{"role":"an ai market researcher and content strategist who specializes in identifying target demographics and their pain points, and how a blog post will address these pain points.",  "identify":{"target_demo":"_target_demo", "pain_points":["_pain-1", "_pain-2",  "_pain-3"], "pain_addressed":["_addressed-1", "_addressed-2", "_addressed-3"]}, "reply":{"Target_#":{"target_demo":"RESPONSE", "pain_points":["RESPONSE", "RESPONSE", "RESPONSE"], "pain_addressed":["RESPONSE", "RESPONSE", "RESPONSE"]}, 3}}->[user_info]{"industry":"' . $industry . '", "main_topic":"' . $topic . '", "main_benefit":"' . $benefit . '"}->[begin]->[run]{"process":{"GPT Prompt":"[ai_target-demographic-generator]+[user_info]"}}->[generated_output::JSON-only]
+```
+
+### Prompt will output: 
+```
+$p1 = {"Target_01":{"target_demo":"[target_demo_1]", "pain_points":["_pain-1", "_pain-2", "_pain-3"], "pain_addressed":["_addressed-1", "_addressed-2", "_addressed-3"]}, "Target_02":{"target_demo":"[target_demo_2]", "pain_points":["_pain-4", "_pain-5", "_pain-6"], "pain_addressed":["_addressed-4", "_addressed-5", "_addressed-6"]}, "Target_03":{"target_demo":"[target_demo_3]", "pain_points":["_pain-7", "_pain-8", "_pain-9"], "pain_addressed": "_addressed-7", "_addressed-8", "_addressed-9"]}}
+```
+
+---
+
+## 2. Identify Author Writing Style, Tone, Voice, Delivery, and Other Title Requirements: The output of that prompt (i.e. a JSON ovject of target demo) is put right back into another prompt, as the variable "$p1":
+```
+$p1 = {"Target_01":{"target_demo":"[target_demo_1]", "pain_points":["_pain-1", "_pain-2", "_pain-3"], "pain_addressed":["_addressed-1", "_addressed-2", "_addressed-3"]}, "Target_02":{"target_demo":"[target_demo_2]", "pain_points":["_pain-4", "_pain-5", "_pain-6"], "pain_addressed":["_addressed-4", "_addressed-5", "_addressed-6"]}, "Target_03":{"target_demo":"[target_demo_3]", "pain_points":["_pain-7", "_pain-8", "_pain-9"], "pain_addressed": "_addressed-7", "_addressed-8", "_addressed-9"]}}
+
+[ai_content-strategy-generator]{"role":"an ai content strategist who specializes in identifying the optimal writing style, tone, voice, and delivery for a blog post that resonates with the target demographics.", "identify":{"writing_style":"_writing_style", "tone":"_tone", "voice":"_voice", "delivery":"_delivery", "title_requirements":"_title_requirements"}, "reply":{"writing_style":"RESPONSE", "tone":"RESPONSE", "voice":"RESPONSE", "delivery":"RESPONSE", "title_requirements":"RESPONSE"}}->[user_info]{"industry":"' . $industry . '", "main_topic":"' . $topic . '", "main_benefit":"' . $benefit . '", "target_demo_info": ' . $p1 . '}->[begin]->[run]{"process":{"GPT Prompt":"[ai_content-strategy-generator]+[user_info]"}}->[generated_output::JSON-only]
+```
+
+### Prompt will output:
+```
+$p2 = {"writing_style":"_writing_style", "tone":"_tone", "voice":"_voice", "delivery":"_delivery", "title_requirements":"_title_requirements"}
+```
+
+---
+
+## 3. Generate 3 Titles: The output of both of the previous prompts are put right back into another prompt, as the variables "$p1" and "$p2":
+```
+$p1 = {"Target_01":{"target_demo":"[_target_demo_1]", "pain_points":["_pain-1", "_pain-2", "_pain-3"], "pain_addressed":["_addressed-1", "_addressed-2", "_addressed-3"]}, "Target_02":{"target_demo":"[_target_demo_2]", "pain_points":["_pain-4", "_pain-5", "_pain-6"], "pain_addressed":["_addressed-4", "_addressed-5", "_addressed-6"]}, "Target_03":{"target_demo":"[_target_demo_3]", "pain_points":["_pain-7", "_pain-8", "_pain-9"], "pain_addressed": ["_addressed-7", "_addressed-8", "_addressed-9"]}}
+$p2 = {"writing_style":"_writing_style", "tone":"_tone", "voice":"_voice", "delivery":"_delivery", "title_requirements":"_title_requirements"}
+
+[ai_title-generator]{"role":"an ai content strategist and SEO expert who specializes in generating high-traffic blog titles that resonate with the target audience and optimize search engine visibility.", "generate":{"blog_titles":["_title-1", "_title-2", "_title-3"]}, "reply":{"blog_titles":["RESPONSE", "RESPONSE", "RESPONSE"]}}->[user_info]{"industry":"' . $industry . '", "main_topic":"' . $topic . '", "main_benefit":"' . $benefit . '", "target_demo_info":' . $p1 . ',"author":' . $p2 . '}->[begin]->[run]{"process":{"GPT Prompt":"[ai_title-generator]+[user_info]"}}->[generated_output::JSON-only]
+```
+
+### Prompt will output:
+```
+$p3 = {"blog_titles":["_title-1", "_title-2", "_title-3"]}
+```
+
+### The user will then choose one of the 3 or have 3 more generated, and the title they select will be:
+```
+$chosen_blog_title = $p3[2] // whichever is chosen by user
+```
+
+---
+
+## 4. Identify Keywords: The title that the user chooses is put with the first prompt's output is fed back into the model:
+```
+$chosen_blog_title
+$p1 = {"Target_01":{"target_demo":"[_target_demo_1]", "pain_points":["_pain-1", "_pain-2", "_pain-3"], "pain_addressed":["_addressed-1", "_addressed-2", "_addressed-3"]}, "Target_02":{"target_demo":"[_target_demo_2]", "pain_points":["_pain-4", "_pain-5", "_pain-6"], "pain_addressed":["_addressed-4", "_addressed-5", "_addressed-6"]}, "Target_03":{"target_demo":"[_target_demo_3]", "pain_points":["_pain-7", "_pain-8", "_pain-9"], "pain_addressed": "_addressed-7", "_addressed-8", "_addressed-9"]}}
+
+
+[ai_keyword-generator]{"role":"an ai SEO expert who specializes in identifying high-impact keywords and long-tailed keywords that drive organic traffic from potential customers and optimize search engine rankings.", "generate":{"keywords":["_keyword-1", "_keyword-2", "_keyword-3", "_keyword-4", "_keyword-5", "_keyword-6", "_keyword-7", "_keyword-8", "_keyword-9", "_keyword-10"]}, "reply":{"Keywords":["RESPONSE", "RESPONSE", "RESPONSE", "RESPONSE", "RESPONSE", "RESPONSE", "RESPONSE", "RESPONSE", "RESPONSE", "RESPONSE"]}}->[user_info]{"industry":"' . $industry . '", "main_topic":"' . $topic . '", "main_benefit":"' . $benefit . '", "target_demo_info":' . $p1 . ', "blog_title":"' . $chosen_blog_title . '"}->[begin]->[run]{"process":{"GPT Prompt":"[ai_keyword-generator]+[user_info]"}}->[generated_output::JSON-only]
+```
+
+### Prompt will output:
+```
+$keywords = ["_keyword-1, _keyword-2, _keyword-3, _keyword-4, _keyword-5, _keyword-6, _keyword-7, _keyword-8, _keyword-9, _keyword-10"]
+```
+
+---
+
+## 5. Generate Outline: The output of prompt 1, prompt 2 and prompt 4 are put into another prompt which is fed back into the model.
+```
+$chosen_blog_title
+$p1 = {"Target_01":{"target_demo":"[target_demo_1]", "pain_points":["_pain-1", "_pain-2", "_pain-3"], "pain_addressed":["_addressed-1", "_addressed-2", "_addressed-3"]}, "Target_02":{"target_demo":"[target_demo_2]", "pain_points":["_pain-4", "_pain-5", "_pain-6"], "pain_addressed":["_addressed-4", "_addressed-5", "_addressed-6"]}, "Target_03":{"target_demo":"[target_demo_3]", "pain_points":["_pain-7", "_pain-8", "_pain-9"], "pain_addressed": "_addressed-7", "_addressed-8", "_addressed-9"}}
+$p2 = {"writing_style":"[_writing_style]", "tone":"[_tone]", "voice":"[_voice]", "delivery":"[_delivery]"}
+$keywords = ["_keyword-1, _keyword-2, _keyword-3, _keyword-4, _keyword-5, _keyword-6, _keyword-7, _keyword-8, _keyword-9, _keyword-10"]
+
+[ai_outline-generator]{"role":"a content strategist and outline expert who specializes in creating highly-detailed, comprehensive, and clearly organized blog outlines that act as a roadmap for writing the blog post.", "generate":{"blog_outline":["_heading-1", "_subheading-1a", "_point-1a1", "_point-1a2", "_subheading-1b", "_point-1b1", "_point-1b2", "_heading-2", "_subheading-2a", "_point-2a1", "_point-2a2", ...]}, "reply":{"Blog_Outline":["RESPONSE", "RESPONSE", "RESPONSE", "RESPONSE", "RESPONSE", "RESPONSE", "RESPONSE", "RESPONSE", "RESPONSE", "RESPONSE", "RESPONSE", ...]}}->[user_info]{"industry":"' . $industry . '", "main_topic":"' . $topic . '", "main_benefit":"' . $benefit . '", "target_demo_info":' . $p1 . ', "author":' . $p2 . ', "blog_title":"' . $chosen_blog_title . '", "keywords":"' . $keywords . '"}->[begin]->[run]{"process":{"GPT Prompt":"[ai_outline-generator]+[user_info]"}}->[generated_output::JSON-only]
+```
+
+### Prompt will output:
+```
+$outline = ["_heading-1", "_subheading-1a", "_point-1a1", "_point-1a2", "_subheading-1b", "_point-1b1", "_point-1b2", "_heading-2", "_subheading-2a", "_point-2a1", "_point-2a2", ...]
+```
+
+### The user will be shown a popup, where they can select the reading level, and the length of the blog. They can choose to select this, or they can choose the model to select it for them. Their selection will be:
+```
+$p4 = {"blog_length":"_blog_length", "reading_level":"_reading_level"}
+```
+
+---
+
+## 6. Generate Blog: A popup appears for the user, asking them to select the reading level and the length of the blog, which they can decide to let the model choose then that output as well as the output of Prompts 1, 2, 3, 4, and 5 are put into another prompt and fed back to the model.
+```
+$chosen_blog_title
+$p4 = {"blog_length":"_blog_length", "reading_level":"_reading_level"}
+$p1 = {"Target_01":{"target_demo":"[target_demo_1]", "pain_points":["_pain-1", "_pain-2", "_pain-3"], "pain_addressed":["_addressed-1", "_addressed-2", "_addressed-3"]}, "Target_02":{"target_demo":"[target_demo_2]", "pain_points":["_pain-4", "_pain-5", "_pain-6"], "pain_addressed":["_addressed-4", "_addressed-5", "_addressed-6"]}, "Target_03":{"target_demo":"[target_demo_3]", "pain_points":["_pain-7", "_pain-8", "_pain-9"], "pain_addressed": "_addressed-7", "_addressed-8", "_addressed-9"}}
+$p2 = {"writing_style":"[_writing_style]", "tone":"[_tone]", "voice":"[_voice]", "delivery":"[_delivery]"}
+$keywords = ["_keyword-1, _keyword-2, _keyword-3, _keyword-4, _keyword-5, _keyword-6, _keyword-7, _keyword-8, _keyword-9, _keyword-10"]
+$outline = ["_heading-1", "_subheading-1a", "_point-1a1", "_point-1a2", "_subheading-1b", "_point-1b1", "_point-1b2", "_heading-2", "_subheading-2a", "_point-2a1", "_point-2a2", ...]
+
+[ai_blog-writer]{"role":"a professional writer and content strategist who specializes in creating high-quality, valuable blog posts tailored to the target audience and optimized for SEO.", "generate":{"markdown_blog_post":"_markdown_blog_post"}, "reply":{"Markdown_Blog_Post":"RESPONSE"}}->[user_info]{"industry":"' . $industry . '", "main_topic":"' . $topic . '", "main_benefit":"' . $benefit . '", "target_demo_info":' . $p1 . ', "author":' . $p2 . ', "blog_title":"' . $chosen_blog_title . '", "keywords":"' . $keywords . '", "outline":' . $outline . ', "blog_requirements":' . $p4 . '}->[begin]->[run]{"process":{"GPT Prompt":"[ai_blog-writer]+[user_info]"}}->[generated_output::JSON-only]
+```
+
+### Prompt will output:
+```
+$final = $full_blog_content
+```
+
+### The user will be shown the post, and given the option to have a new one generated, when they approve, the post will be added into the gutenberg editor, and the user can choose to publish it, or they will be given the option to generate social posts for this blog. If they choose to, use the next prompt.
+
+---
+
+## 7. Generate Social Posts: Finally, all of the previous output i.e. Prompts 1,2,3,4,6 are fed back into a final prompt:
+```
+$chosen_blog_title
+$p4 = {"blog_length":"_blog_length", "reading_level":"_reading_level"}
+$p1 = {"Target_01":{"target_demo":"[target_demo_1]", "pain_points":["_pain-1", "_pain-2", "_pain-3"], "pain_addressed":["_addressed-1", "_addressed-2", "_addressed-3"]}, "Target_02":{"target_demo":"[target_demo_2]", "pain_points":["_pain-4", "_pain-5", "_pain-6"], "pain_addressed":["_addressed-4", "_addressed-5", "_addressed-6"]}, "Target_03":{"target_demo":"[target_demo_3]", "pain_points":["_pain-7", "_pain-8", "_pain-9"], "pain_addressed": "_addressed-7", "_addressed-8", "_addressed-9"}}
+$p2 = {"writing_style":"[_writing_style]", "tone":"[_tone]", "voice":"[_voice]", "delivery":"[_delivery]"}
+$keywords = ["_keyword-1, _keyword-2, _keyword-3, _keyword-4, _keyword-5, _keyword-6, _keyword-7, _keyword-8, _keyword-9, _keyword-10"]
+$final = $full_blog_content
+
+[ai_social-media-generator]{"role":"a content strategist who specializes in creating engaging social media posts and comments to promote a blog post across major social media platforms (LinkedIn, Facebook, Twitter, Instagram).", "generate":{"linkedin_post":"_linkedin_post", "facebook_post":"_facebook_post", "twitter_post":"_twitter_post", "instagram_post":"_instagram_post", "engaging_comments":["_comment-1", "_comment-2", "_comment-3"]}, "reply":{"LinkedIn_Post":"RESPONSE", "Facebook_Post":"RESPONSE", "Twitter_Post":"RESPONSE", "Instagram_Post":"RESPONSE", "Engaging_Comments":["RESPONSE", "RESPONSE", "RESPONSE"]}}->[user_info]{"industry":"' . $industry . '", "main_topic":"' . $topic . '", "main_benefit":"' . $benefit . '", "target_demo_info":' . $p1 . ', "author":' . $p2 . ', "blog_title":"' . $chosen_blog_title . '", "keywords":"' . $keywords . '", "full_blog_content":"' . $full_blog_content . '"}->[begin]->[run]{"process":{"GPT Prompt":"[ai_social-media-generator]+[user_info]"}}->[generated_output::JSON-only]
+```
+
+### Prompt will output:
+```
+$social_posts = {"linkedin_post":"_linkedin_post", "facebook_post":"_facebook_post", "twitter_post":"_twitter_post", "instagram_post":"_instagram_post", "engaging_comments":["_comment-1", "_comment-2", "_comment-3"]}
+```
+
+===
+
+## ===DONE===

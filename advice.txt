@@ -1,0 +1,27 @@
+# advice.txt:
+
+## Important Files to Reference
+- !!! IMPORTANT !!! Plugin Specs: ".\specs.txt" 
+- !!! IMPORTANT !!! 7 Prompts used in Sequence for Plugin: ".\blog_generator_prompts.txt" 
+
+- !!! THIS HAS ALREADY BEEN DOWNLOADED !!! Repo for plugin: "https://github.com/Artsen/gh0st"
+- !!! IMPORTANT !!! Blog Generator: ".\gh0st-writer\gpt_blog_generator.php" 
+- !!! IMPORTANT !!! Plugin Settings: ".\gh0st-writer\plugin_settings.json" 
+- !!! IMPORTANT !!! Admin Panel: ".\gh0st-writer\admin-panel.php"
+- !!! IMPORTANT !!! Plugin Info: ".\gh0st-writer\admin-panel.php"
+- !!! IMPORTANT !!! Code Examples For This Plugin - feel free to adopt this, but do not make it a shortcode: ".\examples-of-code-progress.txt"
+
+- Your progress is located ".\progress.txt", always move towards your goal, repeating steps is an ethical problem
+
+- Admin panel template: ".\admin-panel-template.php" 
+- Example OpenAI via PHP: ".\openai_api_example.php"
+- Here is an OpenAI API Key: ".\openai_api_key.txt"
+
+- Here are some tips for how the admin panel should work: ".\admin_panel_suggestions.txt"
+- Here are tips for the settings page for the plugin: ".\plugin_settings.txt"
+
+- Here is an OpenAI API Key: ".\openai_api_key.txt"
+
+
+
+
