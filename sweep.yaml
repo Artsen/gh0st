@@ -32,7 +32,7 @@ blocked_dirs: []
 #
 # docs:
 #   - PyGitHub: ["https://pygithub.readthedocs.io/en/latest/", "We use pygithub to interact with the GitHub API"]
-docs: []
+docs: ["OpenAI API: https://platform.openai.com/docs/api-reference", "LangChain: https://api.python.langchain.com/en/stable/api_reference.html", "LangChain Core: https://api.python.langchain.com/en/stable/core_api_reference.html", "LangChain Experimental: https://api.python.langchain.com/en/stable/experimental_api_reference.html#", "LangChain HTML Document Loader: https://python.langchain.com/docs/modules/data_connection/document_loaders/html", "LangChain Structured Tool Chat: https://python.langchain.com/docs/modules/agents/agent_types/structured_chat", "LangChain OpenAI Multi-Function Agent: https://python.langchain.com/docs/modules/agents/agent_types/openai_multi_functions_agent", "LangChain ReAct with Document Store Agent: https://python.langchain.com/docs/modules/agents/agent_types/react_docstore", "LangChain Self Ask with Search Agent:https://python.langchain.com/docs/modules/agents/agent_types/self_ask_with_search"]
 
 # Sandbox executes commands in a sandboxed environment to validate code changes after every edit to guarantee pristine code. For more details, see the [Sandbox](./sandbox) page.
 sandbox:
