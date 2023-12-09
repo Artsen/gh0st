@@ -1,6 +1,7 @@
 <?php
 
 function generate_blog_content($api_key, $industry, $topic, $benefit, $tone, $length) {
+    $cache_file = 'cache.json';
     $headers = array(
         'Content-Type: application/json',
         'Authorization: Bearer ' . $api_key
@@ -23,6 +24,7 @@ function generate_blog_content($api_key, $industry, $topic, $benefit, $tone, $le
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
     $result = curl_exec($ch);
+    file_put_contents($cache_file, $result);
     $result = json_decode($result, true);
 
     if (isset($result['Target_01'])) {
@@ -34,8 +36,6 @@ function generate_blog_content($api_key, $industry, $topic, $benefit, $tone, $le
         $target_1_addressed_2 = $result['Target_01']['pain_addressed'][1];
         $target_1_addressed_3 = $result['Target_01']['pain_addressed'][2];
     }
-
-    if (isset($result['Target_02'])) {
         $target_2_demo = $result['Target_02']['target_demo'];
         $target_2_pain_1 = $result['Target_02']['pain_points'][0];
         $target_2_pain_2 = $result['Target_02']['pain_points'][1];
