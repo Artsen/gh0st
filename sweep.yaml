@@ -43,7 +43,7 @@ docs:
  - LangChain OpenAI Multi-Function Agent: ["https://python.langchain.com/docs/modules/agents/agent_types/openai_multi_functions_agent", "Langchain openai multifunctional agent example"] 
  - LangChain ReAct with Document Store Agent: ["https://python.langchain.com/docs/modules/agents/agent_types/react_docstore", "Langchain react documnent store agent example"]
  - LangChain Self Ask with Search Agent: ["https://python.langchain.com/docs/modules/agents/agent_types/self_ask_with_search", "langchain self ask with search agent example"]
-\
+
 
 # Sandbox executes commands in a sandboxed environment to validate code changes after every edit to guarantee pristine code. For more details, see the [Sandbox](./sandbox) page.
 sandbox:
