@@ -1,6 +1,6 @@
 {
-    "tone": ["formal", "conversational", "humorous"],
-    "style": ["journalistic", "academic", "creative"],
+    "tone": ["formal", "conversational", "humorous", "informative", "casual"],
+    "style": ["journalistic", "academic", "creative", "informative", "narrative"],
     "research": true,
     "links": true,
     "keyword_density": 2,
@@ -8,5 +8,7 @@
     "readability_score": true,
     "grammar_checker": true,
     "image_optimization": true,
-    "social_media_sharing": true
+    "social_media_sharing": true,
+    "content_length": ["short", "medium", "long"],
+    "language": ["English", "Spanish", "French", "German", "Italian"]
 }

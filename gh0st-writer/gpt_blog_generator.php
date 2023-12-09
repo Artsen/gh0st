@@ -1,6 +1,9 @@
 <?php
 
 function generate_blog_content($api_key, $industry, $topic, $benefit, $tone, $length) {
+    if (empty($api_key) || empty($industry) || empty($topic) || empty($benefit) || empty($tone) || empty($length)) {
+        return 'Error: Missing parameters.';
+    }
     $cache_file = 'cache.json';
     $headers = array(
         'Content-Type: application/json',
@@ -12,7 +15,8 @@ function generate_blog_content($api_key, $industry, $topic, $benefit, $tone, $le
         'max_tokens' => $length,
         'temperature' => 0.5,
         'n' => 1,
-        'stop' => '. '
+        'stop' => '. ',
+        'callback' => 'ai_content_detection'
     );
 
     $data_string = json_encode($data);
@@ -24,9 +28,14 @@ function generate_blog_content($api_key, $industry, $topic, $benefit, $tone, $le
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
     $result = curl_exec($ch);
+    if (curl_errno($ch)) {
+        return 'Error: ' . curl_error($ch);
+    }
     file_put_contents($cache_file, $result);
     $result = json_decode($result, true);
-
+    if (isset($result['errors']) && !empty($result['errors'])) {
+        return 'Error: ' . $result['errors'][0]['message'];
+    }
     if (isset($result['Target_01'])) {
         $target_1_demo = $result['Target_01']['target_demo'];
         $target_1_pain_1 = $result['Target_01']['pain_points'][0];

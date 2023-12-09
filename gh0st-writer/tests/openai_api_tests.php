@@ -15,8 +15,9 @@ class OpenAIAPITests extends TestCase
 
     public function testConnectionToAPI()
     {
+        $this->assertNotEmpty($this->openai_api_key, "API key is not provided.");
         $headers = openai_authenticate($this->openai_api_key);
-        $this->assertNotEmpty($headers);
+        $this->assertNotEmpty($headers, "Failed to connect to the API.");
     }
 
     public function testContentGenerationAndCaching()
@@ -46,11 +47,17 @@ class OpenAIAPITests extends TestCase
         $_POST['my_plugin_settings'] = array('setting1' => 'value1', 'setting2' => 'value2');
         $_POST['my_plugin_prompt'] = 'Write a blog post about artificial intelligence.';
 
+        $this->assertNotEmpty($_POST['my_plugin_api_key'], "API key is not provided.");
+        $this->assertNotEmpty($_POST['my_plugin_settings'], "Settings are not provided.");
+        $this->assertNotEmpty($_POST['my_plugin_prompt'], "Prompt is not provided.");
+
         // Call the admin panel function
         my_plugin_options_page();
 
         // Check if the API key, settings, and content are saved correctly
         $this->assertEquals($this->openai_api_key, get_option('my_plugin_api_key'));
         $this->assertEquals(array('setting1' => 'value1', 'setting2' => 'value2'), get_option('my_plugin_settings'));
+        $this->assertNotEmpty(get_option('my_plugin_content'));
+    }
         $this->assertNotEmpty(get_option('my_plugin_content'));
     }
