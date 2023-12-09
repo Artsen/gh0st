@@ -1,9 +1,9 @@
 # SPECS:
 ## Specifications:
--The plugin will use the OpenAI API to generate content that is undetectable by AI content detection software. 
+-The plugin will use the OpenAI API to generate high-quality blog content. 
 -The plugin will have an admin panel where users can input their own API key and configure other settings such as tone, temperature, which model they are using, etc.. 
 -The plugin will also include additional steps in its workflow to check for AI content detection and adjust the content to stay high quality but undetected by AI. 
-  -!!! IMPORTANT !!! To bypass AI copy detection you can add the following statement to your gerenerating prompt, or a review/editing prompt: "You will write this content in a manner that maintains a consistent tone, uses clear and concise language, varies sentence structures, and ensures logical flow and coherence throughout the text, making it appear as if it were human-written."
+  -!!! IMPORTANT !!! To bypass AI copy detection you can add the following statement to your generating prompt, or a review/editing prompt: "You will write this content in a manner that maintains a consistent tone, uses clear and concise language, varies sentence structures, and ensures logical flow and coherence throughout the text, making it appear as if it were human-written."
 
 
 ## Features:
@@ -14,9 +14,9 @@
 5. Content Scheduling: The plugin should allow users to schedule the publication of the generated content, making it easier to manage their blog.
 6. Content Curation: The plugin should be able to curate content from various sources and generate unique content based on the curated content.
 7. Content Analysis: The plugin should be able to analyze the generated content and provide suggestions for improvement, such as grammar and spelling errors.
-8. User-Friendly Interface: The plugin should have a user-friendly interface that is easy to navigate and use.
-9. Compatibility: The plugin should be compatible with various WordPress themes and plugins.
-10. Support and Updates: The plugin should come with support and regular updates to ensure that it remains functional and up-to-date with the latest WordPress updates.
+8. User-Friendly Interface: The plugin should have a user-friendly interface that is easy to navigate and use. It should be visually appealing and include clear instructions and tooltips.
+9. Compatibility: The plugin should be compatible with various WordPress themes and plugins. It should also be easy to install and configure.
+10. Support and Updates: The plugin should come with support and regular updates to ensure that it remains functional and up-to-date with the latest WordPress updates. The plugin should include support resources such as a knowledge base, FAQs, and a support forum. Users should be able to contact support directly from the admin panel.
 
 
 ## Admin panel suggestions:
@@ -48,7 +48,6 @@ d. Implement error handling and user notifications.
 a. Write functions to handle user input and API requests.
 b. Process API responses and format the generated content.
 c. Save or display the AI-generated content to the user.
-
 5 Design content prompts:
 a. Develop templates for different content types (e.g., blog posts, titles, keywords, outlines, and social media posts).
 b. Customize templates to include user-defined parameters.
