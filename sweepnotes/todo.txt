@@ -1,0 +1,36 @@
+def update_todo_list(priority_list, todo_file_path):
+    # Read the current contents of the todo file
+    current_contents = read_file(todo_file_path)
+
+    # Split the contents into lines
+    lines = current_contents.split('\n')
+
+    # Update the priority list in the todo file
+    updated_contents = []
+    for line in lines:
+        if line.strip().startswith('-'):
+            # Check if the task is completed
+            task = line.strip()[1:].strip()
+            if task in priority_list:
+                # Mark the task as completed with an 'X'
+                updated_contents.append(f'- [X] {task}')
+            else:
+                # Task is not completed, keep it as is
+                updated_contents.append(line)
+        else:
+            # Non-task line, keep it as is
+            updated_contents.append(line)
+
+    # Write the updated contents to the todo file
+    write_file(todo_file_path, '\n'.join(updated_contents))
+
+
+def read_file(file_path):
+    with open(file_path, 'r') as file:
+        contents = file.read()
+    return contents
+
+
+def write_file(file_path, contents):
+    with open(file_path, 'w') as file:
+        file.write(contents)
