@@ -1,2 +1,2 @@
 # gh0st
-swift: write the readme of this plugin
+sweep: write the readme of this plugin
