@@ -43,10 +43,10 @@
 - [ ] Add necessary disclaimers and privacy policy information
 
 ## Testing the Plugin
-- [ ] Create various test cases and scenarios
-- [ ] Test the plugin in a local WordPress installation
-- [ ] Identify bugs, errors, and areas for improvement
-- [ ] Iterate on the plugin based on testing results
+- [x] Create various test cases and scenarios
+- [x] Test the plugin in a local WordPress installation
+- [x] Identify bugs, errors, and areas for improvement
+- [x] Iterate on the plugin based on testing results
 
 ## Beta Testing
 - [ ] Distribute the plugin to a limited group of users
