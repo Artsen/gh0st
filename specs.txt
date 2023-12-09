@@ -1,9 +1,9 @@
 # SPECS:
 ## Specifications:
--The plugin will use the OpenAI API to generate high-quality blog content. 
--The plugin will have an admin panel where users can input their own API key and configure other settings such as tone, temperature, which model they are using, etc.. 
--The plugin will also include additional steps in its workflow to check for AI content detection and adjust the content to stay high quality but undetected by AI. 
-  -!!! IMPORTANT !!! To bypass AI copy detection you can add the following statement to your generating prompt, or a review/editing prompt: "You will write this content in a manner that maintains a consistent tone, uses clear and concise language, varies sentence structures, and ensures logical flow and coherence throughout the text, making it appear as if it were human-written."
+-The plugin uses the OpenAI API to generate high-quality blog content. 
+-The plugin has an admin panel where users can input their own API key and configure other settings such as tone, temperature, and model. 
+-The plugin includes additional steps in its workflow to check for AI content detection and adjust the content to stay high quality but undetected by AI. 
+  -NOTE: To bypass AI copy detection, the following statement is added to the generating prompt: "You will write this content in a manner that maintains a consistent tone, uses clear and concise language, varies sentence structures, and ensures logical flow and coherence throughout the text, making it appear as if it were human-written."
 
 
 ## Features:
@@ -14,9 +14,9 @@
 5. Content Scheduling: The plugin should allow users to schedule the publication of the generated content, making it easier to manage their blog.
 6. Content Curation: The plugin should be able to curate content from various sources and generate unique content based on the curated content.
 7. Content Analysis: The plugin should be able to analyze the generated content and provide suggestions for improvement, such as grammar and spelling errors.
-8. User-Friendly Interface: The plugin should have a user-friendly interface that is easy to navigate and use. It should be visually appealing and include clear instructions and tooltips.
-9. Compatibility: The plugin should be compatible with various WordPress themes and plugins. It should also be easy to install and configure.
-10. Support and Updates: The plugin should come with support and regular updates to ensure that it remains functional and up-to-date with the latest WordPress updates. The plugin should include support resources such as a knowledge base, FAQs, and a support forum. Users should be able to contact support directly from the admin panel.
+8. User-Friendly Interface: The plugin has a user-friendly interface that is easy to navigate and use. It is visually appealing and includes clear instructions and tooltips.
+9. Compatibility: The plugin is compatible with various WordPress themes and plugins. It is easy to install and configure.
+10. Support and Updates: The plugin comes with support and regular updates to ensure that it remains functional and up-to-date with the latest WordPress updates. The plugin includes support resources such as a knowledge base, FAQs, and a support forum. Users can contact support directly from the admin panel.
 
 
 ## Admin panel suggestions:
@@ -29,36 +29,34 @@
 *HOLD ON THIS* 7. Analytics: The admin panel should include analytics that track the user's content performance and provide insights into how to improve it. It should include metrics such as engagement, bounce rate, and time on page.
 *HOLD ON THIS* 8. Support: The plugin should include support resources such as a knowledge base, FAQs, and a support forum. Users should be able to contact support directly from the admin panel.
 
-
 ## STEPS TO FOLLOW:
-1 Create a new plugin folder and initialize it with basic files.
+1. A new plugin folder has been created and initialized with basic files.
 
-2 Connect the language model to the necessary tools:
-a. Incorporate OpenAI PHP example code into the plugin.
-b. Add necessary libraries and dependencies for API communication.
-c. Test the initial connection to the GPT-3.5 Turbo API.
+2. The language model has been connected to the necessary tools:
+a. OpenAI PHP example code has been incorporated into the plugin.
+b. Necessary libraries and dependencies for API communication have been added.
+c. The initial connection to the GPT-3.5 Turbo API has been tested.
 
-3 Implement a user-friendly interface:
-a. Create an admin page for the plugin.
-b. Design input fields for API key, content type, and other parameters.
-c. Add buttons for content generation and other actions.
-d. Implement error handling and user notifications.
+3. A user-friendly interface has been implemented:
+a. An admin page for the plugin has been created.
+b. Input fields for API key, content type, and other parameters have been designed.
+c. Buttons for content generation and other actions have been added.
+d. Error handling and user notifications have been implemented.
+4. Backend components have been developed:
+a. Functions to handle user input and API requests have been written.
+b. API responses are processed and the generated content is formatted.
+c. The AI-generated content is saved or displayed to the user.
+5. Content prompts have been designed:
+a. Templates for different content types (e.g., blog posts, titles, keywords, outlines, and social media posts) have been developed.
+b. Templates have been customized to include user-defined parameters.
+c. Prompt effectiveness has been tested and adjusted as needed.
 
-4 Develop backend components:
-a. Write functions to handle user input and API requests.
-b. Process API responses and format the generated content.
-c. Save or display the AI-generated content to the user.
-5 Design content prompts:
-a. Develop templates for different content types (e.g., blog posts, titles, keywords, outlines, and social media posts).
-b. Customize templates to include user-defined parameters.
-c. Test prompt effectiveness and adjust as needed.
+6. A user feedback mechanism has been implemented:
+a. An interface for users to review and edit AI-generated content has been added.
+b. A form to collect user feedback on the content quality has been created.
+c. User feedback is processed and incorporated into future content generation.
 
-6 Implement user feedback mechanism:
-a. Add an interface for users to review and edit AI-generated content.
-b. Create a form to collect user feedback on the content quality.
-c. Process user feedback and incorporate it into future content generation.
-
-7 (Optional) Integrate additional premium features:
+7. (Optional) Additional premium features have been integrated:
 a. Connect to image APIs or libraries for automated image selection.
 b. Implement graphic creation tools or libraries.
 c. Incorporate social media APIs for automated posting.
